@@ -18,7 +18,6 @@ use Doctrine\ORM\EntityManager;
 use Exception;
 use Exporter\Writer\CsvWriter;
 use Exporter\Writer\XlsWriter;
-use FOS\RestBundle\Util\Codes;
 use League\Flysystem\Adapter\Ftp as FtpAdapter;
 use League\Flysystem\AwsS3v3\AwsS3Adapter;
 use League\Flysystem\Filesystem;
@@ -758,7 +757,7 @@ class FilePayload
             if ($queue) {
                 throw new ContactClientException(
                     'Skipping duplicate Contact. Already queued for file delivery.',
-                    Codes::HTTP_CONFLICT,
+                    Response::HTTP_CONFLICT,
                     null,
                     Stat::TYPE_DUPLICATE,
                     false,
@@ -795,7 +794,7 @@ class FilePayload
                             $this->valid = false;
                             throw new ContactClientException(
                                 'Skipping duplicate Contact. Already queued for file delivery!',
-                                Codes::HTTP_CONFLICT,
+                                Response::HTTP_CONFLICT,
                                 null,
                                 Stat::TYPE_DUPLICATE,
                                 false,
@@ -811,7 +810,7 @@ class FilePayload
         if (!$this->queue) {
             throw new ContactClientException(
                 'Could not append this contact to the queue.',
-                Codes::HTTP_INTERNAL_SERVER_ERROR,
+                Response::HTTP_INTERNAL_SERVER_ERROR,
                 isset($e) ? $e : null,
                 Stat::TYPE_ERROR,
                 false
@@ -930,7 +929,7 @@ class FilePayload
                 if (!$this->contact) {
                     throw new ContactClientException(
                         'This contact appears to have been deleted: '.$contactId,
-                        Codes::HTTP_GONE,
+                        Response::HTTP_GONE,
                         null,
                         Stat::TYPE_REJECT,
                         false
@@ -1014,7 +1013,7 @@ class FilePayload
             if (!$this->contact) {
                 throw new ContactClientException(
                     'Contact must be defined.',
-                    Codes::HTTP_GONE,
+                    Response::HTTP_GONE,
                     null,
                     Stat::TYPE_REJECT,
                     false
@@ -1273,7 +1272,7 @@ class FilePayload
                             if (true !== $zip->open($target, ZipArchive::CREATE)) {
                                 throw new ContactClientException(
                                     'Cound not open zip '.$target,
-                                    Codes::HTTP_INTERNAL_SERVER_ERROR,
+                                    Response::HTTP_INTERNAL_SERVER_ERROR,
                                     null,
                                     Stat::TYPE_ERROR,
                                     false
@@ -1288,7 +1287,7 @@ class FilePayload
                 } catch (Exception $e) {
                     throw new ContactClientException(
                         'Could not create compressed file '.$target,
-                        Codes::HTTP_INTERNAL_SERVER_ERROR,
+                        Response::HTTP_INTERNAL_SERVER_ERROR,
                         $e,
                         Stat::TYPE_ERROR,
                         false
@@ -1355,7 +1354,7 @@ class FilePayload
                 } else {
                     throw new ContactClientException(
                         'Could not move file to local location.',
-                        Codes::HTTP_INTERNAL_SERVER_ERROR,
+                        Response::HTTP_INTERNAL_SERVER_ERROR,
                         null,
                         Stat::TYPE_ERROR,
                         false

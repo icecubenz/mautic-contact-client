@@ -49,6 +49,10 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Yaml\Yaml;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 /**
  * Class ClientIntegration.
@@ -1425,7 +1429,7 @@ class ClientIntegration extends AbstractIntegration
 
                 $builder->add(
                     'contactclient',
-                    'choice',
+                    ChoiceType::class,
                     [
                         'choices'     => $clients,
                         'expanded'    => false,
@@ -1470,7 +1474,7 @@ class ClientIntegration extends AbstractIntegration
 
                 $builder->add(
                     'contactclient_overrides_button',
-                    'button',
+                    ButtonType::class,
                     [
                         'label' => 'mautic.contactclient.integration.overrides',
                         'attr'  => [
@@ -1491,7 +1495,7 @@ class ClientIntegration extends AbstractIntegration
 
                 $builder->add(
                     'contactclient_overrides',
-                    'textarea',
+                    TextareaType::class,
                     [
                         'label'      => 'mautic.contactclient.integration.overrides',
                         'label_attr' => ['class' => 'control-label hide'],
@@ -1508,7 +1512,7 @@ class ClientIntegration extends AbstractIntegration
         if ('features' == $formArea) {
             $builder->add(
                 'email_from',
-                'text',
+                TextType::class,
                 [
                     'label'    => $this->translator->trans('mautic.contactclient.email.from'),
                     'data'     => !isset($data['email_from']) ? '' : $data['email_from'],
@@ -1521,7 +1525,7 @@ class ClientIntegration extends AbstractIntegration
 
             $builder->add(
                 'success_message',
-                'textarea',
+                TextareaType::class,
                 [
                     'label'    => $this->translator->trans('mautic.contactclient.email.success_message'),
                     'data'     => !isset($data['success_message']) ? '' : $data['success_message'],
@@ -1534,7 +1538,7 @@ class ClientIntegration extends AbstractIntegration
 
             $builder->add(
                 'empty_message',
-                'textarea',
+                TextareaType::class,
                 [
                     'label'    => $this->translator->trans('mautic.contactclient.email.empty_message'),
                     'data'     => !isset($data['empty_message']) ? '' : $data['empty_message'],
@@ -1547,7 +1551,7 @@ class ClientIntegration extends AbstractIntegration
 
             $builder->add(
                 'empty_message',
-                'textarea',
+                TextareaType::class,
                 [
                     'label'    => $this->translator->trans('mautic.contactclient.email.empty_message'),
                     'data'     => !isset($data['empty_message']) ? '' : $data['empty_message'],
@@ -1560,7 +1564,7 @@ class ClientIntegration extends AbstractIntegration
 
             $builder->add(
                 'footer',
-                'textarea',
+                TextareaType::class,
                 [
                     'label'    => $this->translator->trans('mautic.contactclient.email.footer'),
                     'data'     => !isset($data['footer']) ? '' : $data['footer'],

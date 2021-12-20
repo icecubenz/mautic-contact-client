@@ -2,17 +2,33 @@
 
 namespace MauticPlugin\MauticContactClientBundle\EventListener;
 
-use Mautic\CoreBundle\EventListener\CommonSubscriber;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Mautic\CoreBundle\Templating\Helper\AssetsHelper;
 use Mautic\LeadBundle\Event\LeadTimelineEvent;
 use Mautic\LeadBundle\LeadEvents;
+use Doctrine\ORM\EntityManager;
 
-class LeadTimelineSubscriber extends CommonSubscriber
+class LeadTimelineSubscriber implements EventSubscriberInterface
 {
     /**
      * @var AssetsHelper
      */
     private $assets;
+
+    /**
+     * @var EntityManager
+     */
+    protected $em;
+
+    /**
+     * LeadTimelineSubscriber constructor.
+     *
+     * @param EntityManager $em
+     */
+    public function __construct(EntityManager $em)
+    {
+        $this->em = $em;
+    }
 
     /**
      * {@inheritdoc}

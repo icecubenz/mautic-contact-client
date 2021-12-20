@@ -17,11 +17,11 @@ return [
 
     'routes' => [
         'main' => [
-            'mautic_contactclient_index'               => [
+            'mautic_contactclient_index' => [
                 'path'       => '/contactclient/{page}',
                 'controller' => 'MauticContactClientBundle:ContactClient:index',
             ],
-            'mautic_contactclient_action'              => [
+            'mautic_contactclient_action' => [
                 'path'         => '/contactclient/{objectAction}/{objectId}',
                 'controller'   => 'MauticContactClientBundle:ContactClient:execute',
                 'requirements' => [
@@ -29,7 +29,7 @@ return [
                     'objectId'     => '\w+',
                 ],
             ],
-            'mautic_contactclient_transactions'        => [
+            'mautic_contactclient_transactions' => [
                 'path'         => '/contactclient/view/{objectId}/transactions/{page}',
                 'controller'   => 'MauticContactClientBundle:Ajax:transaction',
                 'requirements' => [
@@ -51,7 +51,7 @@ return [
                     'objectId' => '\d+',
                 ],
             ],
-            'mautic_contactclient_files'               => [
+            'mautic_contactclient_files' => [
                 'path'         => '/contactclient/view/{objectId}/files/{page}',
                 'controller'   => 'MauticContactClientBundle:Files:index',
                 'requirements' => [
@@ -59,7 +59,7 @@ return [
                     'page'     => '\d+',
                 ],
             ],
-            'mautic_contactclient_files_file'          => [
+            'mautic_contactclient_files_file' => [
                 'path'         => '/contactclient/view/{objectId}/files/file/{fileId}',
                 'controller'   => 'MauticContactClientBundle:Files:file',
                 'requirements' => [
@@ -72,18 +72,20 @@ return [
 
     'services' => [
         'events'       => [
-            'mautic.contactclient.subscriber.stat'          => [
-                'class'     => 'MauticPlugin\MauticContactClientBundle\EventListener\StatSubscriber',
+            'mautic.contactclient.subscriber.stat' => [
+                'class'     => \MauticPlugin\MauticContactClientBundle\EventListener\StatSubscriber::class,
                 'arguments' => [
                     'mautic.contactclient.model.contactclient',
                 ],
             ],
             'mautic.contactclient.subscriber.lead_timeline' => [
-                'class'     => 'MauticPlugin\MauticContactClientBundle\EventListener\LeadTimelineSubscriber',
-                'arguments' => [],
+                'class'     => \MauticPlugin\MauticContactClientBundle\EventListener\LeadTimelineSubscriber::class,
+                'arguments' => [
+                    'doctrine.orm.entity_manager',
+                ],
             ],
             'mautic.contactclient.subscriber.contactclient' => [
-                'class'     => 'MauticPlugin\MauticContactClientBundle\EventListener\ContactClientSubscriber',
+                'class'     => \MauticPlugin\MauticContactClientBundle\EventListener\ContactClientSubscriber::class,
                 'arguments' => [
                     'router',
                     'mautic.helper.ip_lookup',
@@ -94,16 +96,17 @@ return [
                     'mautic.form.helper.token',
                     'mautic.contactclient.model.contactclient',
                     'session',
+                    'doctrine.orm.entity_manager',
                 ],
             ],
-            'mautic.contactclient.stats.subscriber'         => [
-                'class'     => 'MauticPlugin\MauticContactClientBundle\EventListener\StatsSubscriber',
+            'mautic.contactclient.stats.subscriber' => [
+                'class'     => \MauticPlugin\MauticContactClientBundle\EventListener\StatsSubscriber::class,
                 'arguments' => [
                     'doctrine.orm.entity_manager',
                 ],
             ],
-            'mautic.contactclient.search.subscriber'        => [
-                'class'     => 'MauticPlugin\MauticContactClientBundle\EventListener\SearchSubscriber',
+            'mautic.contactclient.search.subscriber' => [
+                'class'     => \MauticPlugin\MauticContactClientBundle\EventListener\SearchSubscriber::class,
                 'arguments' => [
                     'mautic.contactclient.model.contactclient',
                 ],
@@ -111,32 +114,32 @@ return [
         ],
         'forms'        => [
             'mautic.contactclient.form.type.contactclientshow_list' => [
-                'class'     => 'MauticPlugin\MauticContactClientBundle\Form\Type\ContactClientShowType',
+                'class'     => \MauticPlugin\MauticContactClientBundle\Form\Type\ContactClientShowType::class,
                 'arguments' => 'router',
                 'alias'     => 'contactclientshow_list',
             ],
-            'mautic.contactclient.form.type.contactclient_list'     => [
-                'class'     => 'MauticPlugin\MauticContactClientBundle\Form\Type\ContactClientListType',
+            'mautic.contactclient.form.type.contactclient_list' => [
+                'class'     => \MauticPlugin\MauticContactClientBundle\Form\Type\ContactClientListType::class,
                 'arguments' => 'mautic.contactclient.model.contactclient',
                 'alias'     => 'contactclient_list',
             ],
-            'mautic.contactclient.form.type.contactclient'          => [
-                'class'     => 'MauticPlugin\MauticContactClientBundle\Form\Type\ContactClientType',
+            'mautic.contactclient.form.type.contactclient' => [
+                'class'     => \MauticPlugin\MauticContactClientBundle\Form\Type\ContactClientType::class,
                 'alias'     => 'contactclient',
                 'arguments' => [
                     'mautic.security',
                     'mautic.lead.model.lead',
                 ],
             ],
-            'mautic.contactclient.form.type.chartfilter'            => [
-                'class'     => 'MauticPlugin\MauticContactClientBundle\Form\Type\ChartFilterType',
+            'mautic.contactclient.form.type.chartfilter' => [
+                'class'     => \MauticPlugin\MauticContactClientBundle\Form\Type\ChartFilterType::class,
                 'arguments' => 'mautic.factory',
                 'alias'     => 'contactclient_chart',
             ],
         ],
         'models'       => [
-            'mautic.contactclient.model.contactclient'  => [
-                'class'     => 'MauticPlugin\MauticContactClientBundle\Model\ContactClientModel',
+            'mautic.contactclient.model.contactclient' => [
+                'class'     => \MauticPlugin\MauticContactClientBundle\Model\ContactClientModel::class,
                 'arguments' => [
                     'mautic.form.model.form',
                     'mautic.page.model.trackable',
@@ -145,8 +148,8 @@ return [
                     'mautic.lead.model.lead',
                 ],
             ],
-            'mautic.contactclient.model.apipayload'     => [
-                'class'     => 'MauticPlugin\MauticContactClientBundle\Model\ApiPayload',
+            'mautic.contactclient.model.apipayload' => [
+                'class'     => \MauticPlugin\MauticContactClientBundle\Model\ApiPayload::class,
                 'arguments' => [
                     'mautic.contactclient.model.contactclient',
                     'mautic.contactclient.service.transport',
@@ -156,14 +159,14 @@ return [
                 ],
             ],
             'mautic.contactclient.model.apipayloadauth' => [
-                'class'     => 'MauticPlugin\MauticContactClientBundle\Model\ApiPayloadAuth',
+                'class'     => \MauticPlugin\MauticContactClientBundle\Model\ApiPayloadAuth::class,
                 'arguments' => [
                     'mautic.contactclient.helper.token',
                     'doctrine.orm.entity_manager',
                 ],
             ],
-            'mautic.contactclient.model.filepayload'    => [
-                'class'     => 'MauticPlugin\MauticContactClientBundle\Model\FilePayload',
+            'mautic.contactclient.model.filepayload' => [
+                'class'     => \MauticPlugin\MauticContactClientBundle\Model\FilePayload::class,
                 'arguments' => [
                     'mautic.contactclient.model.contactclient',
                     'mautic.contactclient.helper.token',
@@ -179,11 +182,11 @@ return [
                     'mautic.contactclient.helper.utmsource',
                 ],
             ],
-            'mautic.contactclient.model.cache'          => [
-                'class' => 'MauticPlugin\MauticContactClientBundle\Model\Cache',
+            'mautic.contactclient.model.cache' => [
+                'class' => \MauticPlugin\MauticContactClientBundle\Model\Cache::class,
             ],
-            'mautic.contactclient.model.schedule'       => [
-                'class'     => 'MauticPlugin\MauticContactClientBundle\Model\Schedule',
+            'mautic.contactclient.model.schedule' => [
+                'class'     => \MauticPlugin\MauticContactClientBundle\Model\Schedule::class,
                 'arguments' => [
                     'doctrine.orm.default_entity_manager',
                     'mautic.helper.core_parameters',
@@ -192,12 +195,12 @@ return [
         ],
         'integrations' => [
             'mautic.contactclient.integration' => [
-                'class' => 'MauticPlugin\MauticContactClientBundle\Integration\ClientIntegration',
+                'class' => \MauticPlugin\MauticContactClientBundle\Integration\ClientIntegration::class,
             ],
         ],
         'other'        => [
-            'mautic.contactclient.helper.token'      => [
-                'class'     => 'MauticPlugin\MauticContactClientBundle\Helper\TokenHelper',
+            'mautic.contactclient.helper.token' => [
+                'class'     => \MauticPlugin\MauticContactClientBundle\Helper\TokenHelper::class,
                 'arguments' => [
                     'mautic.helper.core_parameters',
                     'monolog.logger.mautic',
@@ -205,25 +208,49 @@ return [
                     'mautic.contactclient.helper.utmsource',
                 ],
             ],
-            'mautic.contactclient.helper.utmsource'  => [
-                'class' => 'MauticPlugin\MauticContactClientBundle\Helper\UtmSourceHelper',
+            'mautic.contactclient.helper.utmsource' => [
+                'class' => \MauticPlugin\MauticContactClientBundle\Helper\UtmSourceHelper::class,
             ],
-            'mautic.contactclient.guzzle.client'     => [
-                'class' => 'GuzzleHttp\Client',
+            'mautic.contactclient.guzzle.client' => [
+                'class' => \GuzzleHttp\Client::class,
             ],
             'mautic.contactclient.service.transport' => [
-                'class'     => 'MauticPlugin\MauticContactClientBundle\Services\Transport',
+                'class'     => \MauticPlugin\MauticContactClientBundle\Services\Transport::class,
                 'arguments' => [
                     'mautic.contactclient.guzzle.client',
                 ],
             ],
             'mautic.contactclient.helper.client_event' => [
-                'class'     => 'MauticPlugin\MauticContactClientBundle\Helper\ClientEventHelper',
+                'class'     => \MauticPlugin\MauticContactClientBundle\Helper\ClientEventHelper::class,
                 'arguments' => [
                     'mautic.campaign.repository.campaign',
                     'mautic.campaign.repository.lead_event_log',
                     'mautic.campaign.repository.event',
                     'doctrine.orm.entity_manager',
+                ],
+            ],
+        ],
+
+        'integrations' => [
+            'mautic.integration.client' => [
+                'class'     => \MauticPlugin\MauticContactClientBundle\Integration\ClientIntegration::class,
+                'arguments' => [
+                    'event_dispatcher',
+                    'mautic.helper.cache_storage',
+                    'doctrine.orm.entity_manager',
+                    'session',
+                    'request_stack',
+                    'router',
+                    'translator',
+                    'logger',
+                    'mautic.helper.encryption',
+                    'mautic.lead.model.lead',
+                    'mautic.lead.model.company',
+                    'mautic.helper.paths',
+                    'mautic.core.model.notification',
+                    'mautic.lead.model.field',
+                    'mautic.plugin.model.integration_entity',
+                    'mautic.lead.model.dnc',
                 ],
             ],
         ],
@@ -233,7 +260,7 @@ return [
         'main' => [
             'mautic.contactclient' => [
                 'route'     => 'mautic_contactclient_index',
-                'access'    => 'plugin:contactclient:items:view',
+                'access'    => 'contactclient:items:view',
                 'id'        => 'mautic_contactclient_root',
                 'iconClass' => 'fa-cloud-upload',
                 'priority'  => 35,

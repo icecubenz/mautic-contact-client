@@ -42,6 +42,7 @@ use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use MauticPlugin\MauticContactClientBundle\Form\Type\ContactClientType;
 
 /**
  * Class ContactClientModel.
@@ -99,7 +100,7 @@ class ContactClientModel extends FormModel
      */
     public function getPermissionBase()
     {
-        return 'plugin:contactclient:items';
+        return 'contactclient:items';
     }
 
     /**
@@ -125,7 +126,7 @@ class ContactClientModel extends FormModel
         // Prevent clone action from complaining about extra fields.
         $options['allow_extra_fields'] = true;
 
-        return $formFactory->create('contactclient', $entity, $options);
+        return $formFactory->create(ContactClientType::class, $entity, $options);
     }
 
     /**

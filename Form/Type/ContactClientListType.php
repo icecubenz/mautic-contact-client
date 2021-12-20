@@ -4,8 +4,8 @@ namespace MauticPlugin\MauticContactClientBundle\Form\Type;
 
 use MauticPlugin\MauticContactClientBundle\Model\ContactClientModel;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 /**
  * Class ContactClientListType.
@@ -51,7 +51,7 @@ class ContactClientListType extends AbstractType
                 'expanded'       => false,
                 'multiple'       => true,
                 'required'       => false,
-                'empty_value'    => function (Options $options) {
+                'placeholder'    => function (Options $options) {
                     return (empty($options['choices'])) ? 'mautic.contactclient.no.contactclientitem.note' : 'mautic.core.form.chooseone';
                 },
                 'disabled'       => function (Options $options) {
@@ -67,7 +67,7 @@ class ContactClientListType extends AbstractType
     /**
      * @return string
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'contactclient_list';
     }
@@ -77,6 +77,6 @@ class ContactClientListType extends AbstractType
      */
     public function getParent()
     {
-        return 'choice';
+        return ChoiceType::class;
     }
 }

@@ -319,7 +319,7 @@ class AjaxController extends CommonAjaxController
         $values   = [];
 
         if (!empty($objectId)) {
-            $em      = $this->dispatcher->getContainer()->get('doctrine.orm.default_entity_manager');
+            $em      = $this->get('doctrine.orm.default_entity_manager');
             /** @var ClientEventHelper $clientEventHelper */
             $clientEventHelper = $this->get('mautic.contactclient.helper.client_event');
             if ($events = $clientEventHelper->getAllClientEvents($objectId)) {

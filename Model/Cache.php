@@ -14,7 +14,6 @@ namespace MauticPlugin\MauticContactClientBundle\Model;
 use DateTime;
 use Doctrine\ORM\EntityManager;
 use Exception;
-use FOS\RestBundle\Util\Codes;
 use Mautic\CoreBundle\Helper\PhoneNumberHelper;
 use Mautic\CoreBundle\Model\AbstractCommonModel;
 use Mautic\LeadBundle\Entity\Lead as Contact;
@@ -355,7 +354,7 @@ class Cache extends AbstractCommonModel
             if ($exclusive) {
                 throw new ContactClientException(
                     'Skipping exclusive Contact.',
-                    Codes::HTTP_CONFLICT,
+                    Response::HTTP_CONFLICT,
                     null,
                     Stat::TYPE_EXCLUSIVE,
                     false,
@@ -385,7 +384,7 @@ class Cache extends AbstractCommonModel
         if ($duplicate) {
             throw new ContactClientException(
                 'Skipping duplicate Contact.',
-                Codes::HTTP_CONFLICT,
+                Response::HTTP_CONFLICT,
                 null,
                 Stat::TYPE_DUPLICATE,
                 false,
@@ -425,7 +424,7 @@ class Cache extends AbstractCommonModel
         if ($limits) {
             throw new ContactClientException(
                 'Not able to send contact to client due to an exceeded budget.',
-                Codes::HTTP_TOO_MANY_REQUESTS,
+                Response::HTTP_TOO_MANY_REQUESTS,
                 null,
                 Stat::TYPE_LIMITS,
                 false,
