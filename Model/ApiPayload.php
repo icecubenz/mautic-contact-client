@@ -148,9 +148,9 @@ class ApiPayload
         $exclusions = ['contactClientModel', 'transport', 'tokenHelper', 'scheduleModel', 'apiPayloadAuth']
     ) {
         foreach (array_diff_key(
-                     get_class_vars(get_class($this)),
-                     array_flip($exclusions)
-                 ) as $name => $default) {
+            get_class_vars(get_class($this)),
+            array_flip($exclusions)
+        ) as $name => $default) {
             $this->$name = $default;
         }
 
@@ -438,7 +438,12 @@ class ApiPayload
             }
             $logs         = [];
             $apiOperation = new ApiOperation(
-                $id + 1, $operation, $this->transport, $this->tokenHelper, $this->test, $updatePayload
+                $id + 1,
+                $operation,
+                $this->transport,
+                $this->tokenHelper,
+                $this->test,
+                $updatePayload
             );
             $this->valid  = false;
             try {

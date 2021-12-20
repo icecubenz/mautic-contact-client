@@ -233,7 +233,11 @@ class ContactClientModel extends FormModel
         // dispatch Stat PostSave event
         try {
             $event = new ContactClientStatEvent(
-                $contactClient, $campaignId, $eventId, $contact, $this->getEntityManager()
+                $contactClient,
+                $campaignId,
+                $eventId,
+                $contact,
+                $this->getEntityManager()
             );
             $this->dispatcher->dispatch(
                 ContactClientEvents::STAT_SAVE,

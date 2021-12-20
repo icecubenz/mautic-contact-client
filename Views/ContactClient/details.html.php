@@ -61,9 +61,9 @@ $website = $item->getWebsite();
                     </div>
                     <div class="col-xs-2 text-right">
                         <?php echo $view->render(
-                            'MauticCoreBundle:Helper:publishstatus_badge.html.php',
-                            ['entity' => $item]
-                        ); ?>
+    'MauticCoreBundle:Helper:publishstatus_badge.html.php',
+    ['entity' => $item]
+); ?>
                     </div>
                 </div>
             </div>
@@ -76,9 +76,9 @@ $website = $item->getWebsite();
                         <table class="table table-bordered table-striped mb-0">
                             <tbody>
                             <?php echo $view->render(
-                                'MauticCoreBundle:Helper:details.html.php',
-                                ['entity' => $item]
-                            ); ?>
+                            'MauticCoreBundle:Helper:details.html.php',
+                            ['entity' => $item]
+                        ); ?>
                             </tbody>
                         </table>
                     </div>
@@ -94,8 +94,8 @@ $website = $item->getWebsite();
                     <a href="javascript:void(0)" class="arrow text-muted collapsed" data-toggle="collapse"
                        data-target="#contactclient-details"><span
                                 class="caret"></span> <?php echo $view['translator']->trans(
-                            'mautic.core.details'
-                        ); ?></a>
+                                'mautic.core.details'
+                            ); ?></a>
                 </span>
             </div>
             <!--/ form detail collapseable toggler -->
@@ -114,16 +114,16 @@ $website = $item->getWebsite();
                                 </div>
                                 <div class="col-xs-8 va-m">
                                     <?php echo $view->render(
-                                        'MauticContactClientBundle:Helper:graph_chartfilter.html.php',
-                                        ['chartFilterForm' => $chartFilterForm, 'class' => 'pull-right']
-                                    ); ?>
+                            'MauticContactClientBundle:Helper:graph_chartfilter.html.php',
+                            ['chartFilterForm' => $chartFilterForm, 'class' => 'pull-right']
+                        ); ?>
                                 </div>
                             </div>
                             <div class="pt-0 pl-15 pb-10 pr-15">
                                 <?php echo $view->render(
-                                    'MauticCoreBundle:Helper:chart.html.php',
-                                    ['chartData' => $stats, 'chartType' => 'line', 'chartHeight' => 300]
-                                ); ?>
+                                        'MauticCoreBundle:Helper:chart.html.php',
+                                        ['chartData' => $stats, 'chartType' => 'line', 'chartHeight' => 300]
+                                    ); ?>
                             </div>
                         </div>
                     </div>
@@ -167,34 +167,34 @@ $website = $item->getWebsite();
             <div class="tab-content pl-md pr-md pb-md bg-white">
                 <div class="tab-pane fade in active bdr-w-0" id="transactions-container">
                     <?php echo $view->render(
-                        'MauticContactClientBundle:Transactions:index.html.php',
-                        [
+                                    'MauticContactClientBundle:Transactions:index.html.php',
+                                    [
                             'contactClient' => $item,
                             'tmpl'          => 'index',
                         ]
-                    ); ?>
+                                ); ?>
                 </div>
                 <?php if ($files['total']): ?>
                     <div class="tab-pane fade in bdr-w-0" id="files-container">
                         <?php echo $view->render(
-                            'MauticContactClientBundle:Files:list.html.php',
-                            [
+                        'MauticContactClientBundle:Files:list.html.php',
+                        [
                                 'contactClient' => $item,
                                 'files'         => $files,
                                 'order'         => isset($order) ? $order : [],
                                 'tmpl'          => 'index',
                             ]
-                        ); ?>
+                    ); ?>
                     </div>
                 <?php endif; ?>
                 <div class="tab-pane fade in bdr-w-0" id="pending-events-container">
                     <?php echo $view->render(
-                        'MauticContactClientBundle:PendingEvents:index.html.php',
-                        [
+                            'MauticContactClientBundle:PendingEvents:index.html.php',
+                            [
                             'contactClient' => $item,
                             'tmpl'          => 'index',
                         ]
-                    ); ?>
+                        ); ?>
                 </div>
                 <!-- custom content -->
                 <?php echo $view['content']->getCustomContent('tabs.content', $mauticTemplateVars); ?>
@@ -214,8 +214,8 @@ $website = $item->getWebsite();
                 <div class="panel bg-info bg-light-lg bdr-w-0 mb-0">
                     <div class="panel-body">
                         <h5 class="fw-sb mb-sm"><?php echo $view['translator']->trans(
-                                'mautic.contactclient.form.website'
-                            ); ?></h5>
+                        'mautic.contactclient.form.website'
+                    ); ?></h5>
                         <p class="mb-sm"><a href="<?php echo $website; ?>" target="_blank"><?php echo $website; ?></a>
                         </p>
                     </div>
@@ -230,9 +230,9 @@ $website = $item->getWebsite();
 
             <!-- recent activity -->
             <?php echo $view->render(
-                'MauticCoreBundle:Helper:recentactivity.html.php',
-                ['logs' => $auditlog['events']]
-            ); ?>
+                                'MauticCoreBundle:Helper:recentactivity.html.php',
+                                ['logs' => $auditlog['events']]
+                            ); ?>
 
         </div>
     </div>

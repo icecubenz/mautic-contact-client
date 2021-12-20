@@ -140,7 +140,7 @@ class FilterHelper
         $result    = true;
         $condition = strtolower($condition);
         $this->validateCondition($condition);
-        if (count($rules) == 0){
+        if (count($rules) == 0) {
             return $result;
         }
         foreach ($rules as $rule) {

@@ -88,9 +88,9 @@ class Schedule
     public function reset($exclusions = ['em', 'coreParametersHelper'])
     {
         foreach (array_diff_key(
-                     get_class_vars(get_class($this)),
-                     array_flip($exclusions)
-                 ) as $name => $default) {
+            get_class_vars(get_class($this)),
+            array_flip($exclusions)
+        ) as $name => $default) {
             $this->$name = $default;
         }
         $this->setNow();

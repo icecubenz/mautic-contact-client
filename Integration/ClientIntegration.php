@@ -198,10 +198,10 @@ class ClientIntegration extends AbstractIntegration
     public function reset($exclusions = ['container', 'contactClientModel', 'dncRepo', 'integrationRepo'])
     {
         foreach (array_diff_key(
-                     get_class_vars(get_class($this)),
-                     get_class_vars(get_parent_class($this)),
-                     array_flip($exclusions)
-                 ) as $name => $default) {
+            get_class_vars(get_class($this)),
+            get_class_vars(get_parent_class($this)),
+            array_flip($exclusions)
+        ) as $name => $default) {
             $this->$name = $default;
         }
 
@@ -220,7 +220,8 @@ class ClientIntegration extends AbstractIntegration
         if (!$this->event) {
             $this->event = $event;
             if (isset($event['config'])
-                && (empty($event['integration'])
+                && (
+                    empty($event['integration'])
                     || (
                         !empty($event['integration'])
                         && $event['integration'] == $this->getName()
@@ -1090,7 +1091,11 @@ class ClientIntegration extends AbstractIntegration
 
         $campaign = $this->getCampaign();
         $event    = new ContactLedgerContextEvent(
-            $campaign, $this->contactClient, $this->statType, null, $this->contact
+            $campaign,
+            $this->contactClient,
+            $this->statType,
+            null,
+            $this->contact
         );
         $this->dispatcher->dispatch(
             'mautic.contactledger.context_create',
@@ -1109,7 +1114,11 @@ class ClientIntegration extends AbstractIntegration
 
         $campaign = $this->getCampaign();
         $event    = new ContactLedgerContextEvent(
-            $campaign, $this->contactClient, $this->statType, null, $this->contact
+            $campaign,
+            $this->contactClient,
+            $this->statType,
+            null,
+            $this->contact
         );
         $this->dispatcher->dispatch(
             'mautic.contactledger.context_capture',

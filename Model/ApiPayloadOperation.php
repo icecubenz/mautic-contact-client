@@ -136,7 +136,10 @@ class ApiPayloadOperation
 
         // Parse the API response.
         $apiResponse          = new ApiResponse(
-            $this->responseExpected, $this->successDefinition, $this->transport, $this->test
+            $this->responseExpected,
+            $this->successDefinition,
+            $this->transport,
+            $this->test
         );
         $this->responseActual = $apiResponse->parse()->getResponse();
         $this->setLogs($apiResponse->getLogs(), 'response');

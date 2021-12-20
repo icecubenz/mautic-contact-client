@@ -16,9 +16,9 @@
     </a>
 <?php else: ?>
     <a href="<?php echo $view['router']->generate(
-        'mautic_contactclient_action',
-        ['objectAction' => 'view', 'objectId' => $client->getId()]
-    ); ?>" data-toggle="ajax">
+    'mautic_contactclient_action',
+    ['objectAction' => 'view', 'objectId' => $client->getId()]
+); ?>" data-toggle="ajax">
         <span><?php echo $client->getName(); ?></span>
         <span class="label label-default pull-right" data-toggle="tooltip" data-placement="left"
               title="ID: <?php echo $client->getId(); ?>" ; ?>ID: <?php echo $client->getId(); ?></span>

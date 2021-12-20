@@ -41,8 +41,8 @@ echo $view['form']->start($form);
                     <li class="active">
                         <a href="#details" role="tab" data-toggle="tab" class="contactclient-tab">
                             <i class="fa fa-cog fa-lg pull-left"></i><?php echo $view['translator']->trans(
-                                'mautic.contactclient.form.group.details'
-                            ); ?>
+    'mautic.contactclient.form.group.details'
+); ?>
                         </a>
                     </li>
                     <li>
@@ -209,8 +209,8 @@ echo $view['form']->start($form);
                                                     data-toggle="button" aria-pressed="false" autocomplete="off">
                                                 <i class="fa fa-check-circle text-success"></i>
                                                 <?php echo $view['translator']->trans(
-                                                    'mautic.contactclient.form.test'
-                                                ); ?>
+                                'mautic.contactclient.form.test'
+                            ); ?>
                                             </button>
                                         </div>
                                         <span class="mr-20"></span>
@@ -267,8 +267,8 @@ echo $view['form']->start($form);
                                                 <div class="col-md-10 col-md-offset-1 mt-10 mb-10">
                                                     <label>
                                                         <?php echo $view['translator']->trans(
-                                                            'mautic.contactclient.form.test_results.logs'
-                                                        ); ?>
+                                                    'mautic.contactclient.form.test_results.logs'
+                                                ); ?>
                                                     </label>
                                                 </div>
                                                 <div class="col-md-10 col-md-offset-1">
@@ -291,8 +291,8 @@ echo $view['form']->start($form);
                                                     data-toggle="button" aria-pressed="false" autocomplete="off">
                                                 <i class="fa fa-check-circle text-success"></i>
                                                 <?php echo $view['translator']->trans(
-                                                    'mautic.contactclient.form.test'
-                                                ); ?>
+                                                            'mautic.contactclient.form.test'
+                                                        ); ?>
                                             </button>
                                         </div>
                                         <span class="mr-20"></span>
@@ -349,8 +349,8 @@ echo $view['form']->start($form);
                                                 <div class="col-md-10 col-md-offset-1 mt-10 mb-10">
                                                     <label>
                                                         <?php echo $view['translator']->trans(
-                                                            'mautic.contactclient.form.test_results.logs'
-                                                        ); ?>
+                                                    'mautic.contactclient.form.test_results.logs'
+                                                ); ?>
                                                     </label>
                                                 </div>
                                                 <div class="col-md-10 col-md-offset-1">
