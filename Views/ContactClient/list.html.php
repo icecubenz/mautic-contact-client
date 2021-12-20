@@ -20,8 +20,8 @@ if ('index' == $tmpl) {
             <tr>
                 <?php
                 echo $view->render(
-                    'MauticCoreBundle:Helper:tableheader.html.php',
-                    [
+    'MauticCoreBundle:Helper:tableheader.html.php',
+    [
                         'checkall'        => 'true',
                         'target'          => '#contactclientTable',
                         'routeBase'       => 'contactclient',
@@ -29,7 +29,7 @@ if ('index' == $tmpl) {
                             'delete' => $permissions['plugin:contactclient:items:delete'],
                         ],
                     ]
-                );
+);
 
                 echo $view->render(
                     'MauticCoreBundle:Helper:tableheader.html.php',
@@ -80,8 +80,8 @@ if ('index' == $tmpl) {
                     <td>
                         <?php
                         echo $view->render(
-                            'MauticCoreBundle:Helper:list_actions.html.php',
-                            [
+                    'MauticCoreBundle:Helper:list_actions.html.php',
+                    [
                                 'item'            => $item,
                                 'templateButtons' => [
                                     'edit'   => $view['security']->hasEntityAccess(
@@ -98,15 +98,15 @@ if ('index' == $tmpl) {
                                 ],
                                 'routeBase'       => 'contactclient',
                             ]
-                        );
+                );
                         ?>
                     </td>
                     <td>
                         <div>
                             <?php echo $view->render(
-                                'MauticCoreBundle:Helper:publishstatus_icon.html.php',
-                                ['item' => $item, 'model' => 'contactclient']
-                            ); ?>
+                            'MauticCoreBundle:Helper:publishstatus_icon.html.php',
+                            ['item' => $item, 'model' => 'contactclient']
+                        ); ?>
                             <a data-toggle="ajax" href="<?php echo $view['router']->path(
                                 'mautic_contactclient_action',
                                 ['objectId' => $item->getId(), 'objectAction' => 'view']
@@ -123,8 +123,8 @@ if ('index' == $tmpl) {
                     <td class="visible-md visible-lg">
                         <?php $category = $item->getCategory(); ?>
                         <?php $catName  = ($category) ? $category->getTitle() : $view['translator']->trans(
-                            'mautic.core.form.uncategorized'
-                        ); ?>
+                                'mautic.core.form.uncategorized'
+                            ); ?>
                         <?php $color = ($category) ? '#'.$category->getColor() : 'inherit'; ?>
                         <span style="white-space: nowrap;"><span class="label label-default pa-4"
                                                                  style="border: 1px solid #d5d5d5; background: <?php echo $color; ?>;"> </span> <span><?php echo $catName; ?></span></span>
@@ -140,19 +140,19 @@ if ('index' == $tmpl) {
     </div>
     <div class="panel-footer">
         <?php echo $view->render(
-            'MauticCoreBundle:Helper:pagination.html.php',
-            [
+                            'MauticCoreBundle:Helper:pagination.html.php',
+                            [
                 'totalItems' => count($items),
                 'page'       => $page,
                 'limits'     => $limit,
                 'baseUrl'    => $view['router']->path('mautic_contactclient_index'),
                 'sessionVar' => 'contactclient',
             ]
-        ); ?>
+                        ); ?>
     </div>
 <?php else: ?>
     <?php echo $view->render(
-        'MauticCoreBundle:Helper:noresults.html.php',
-        ['tip' => 'mautic.contactclient.noresults.tip']
-    ); ?>
+            'MauticCoreBundle:Helper:noresults.html.php',
+            ['tip' => 'mautic.contactclient.noresults.tip']
+        ); ?>
 <?php endif; ?>

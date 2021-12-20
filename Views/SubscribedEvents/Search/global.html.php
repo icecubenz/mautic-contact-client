@@ -10,15 +10,15 @@
  */
 ?>
 <?php if (!empty($showMore)): ?>
-    <a href="<?php echo $view['router']->generate('mautic_contactclient_index', ['search' => $searchString]); ?>"
+    <a href="<?php echo $view['router']->url('mautic_contactclient_index', ['search' => $searchString]); ?>"
        data-toggle="ajax">
         <span><?php echo $view['translator']->trans('mautic.core.search.more', ['%count%' => $remaining]); ?></span>
     </a>
 <?php else: ?>
-    <a href="<?php echo $view['router']->generate(
-        'mautic_contactclient_action',
-        ['objectAction' => 'view', 'objectId' => $client->getId()]
-    ); ?>" data-toggle="ajax">
+    <a href="<?php echo $view['router']->url(
+    'mautic_contactclient_action',
+    ['objectAction' => 'view', 'objectId' => $client->getId()]
+); ?>" data-toggle="ajax">
         <span><?php echo $client->getName(); ?></span>
         <span class="label label-default pull-right" data-toggle="tooltip" data-placement="left"
               title="ID: <?php echo $client->getId(); ?>" ; ?>ID: <?php echo $client->getId(); ?></span>

@@ -41,7 +41,7 @@ $contactClientTransactionVars = [
 
 $view['assets']->addScriptDeclaration(
     'var contactClient = '.json_encode($contactClientTransactionVars),
-        'tabClose'
+    'tabClose'
 );
 ?>
 
@@ -52,9 +52,9 @@ $view['assets']->addScriptDeclaration(
       data-overlay="true"
       data-overlay-target="#clientTransactions-builder-overlay"
       data-action="<?php echo $view['router']->path(
-          'mautic_contactclient_transactions',
-          ['objectId' => $contactClient->getId(), 'objectAction' => 'view']
-      ); ?>">
+    'mautic_contactclient_transactions',
+    ['objectId' => $contactClient->getId(), 'objectAction' => 'view']
+); ?>">
     <input type="hidden" name="message" id="transaction_message"
            value="<?php echo isset($transactions['filters']['message']) ? $transactions['filters']['message'] : null; ?>">
     <input type="hidden" name="utm_source" id="transaction_utmsource"
@@ -89,8 +89,8 @@ $view['assets']->addScriptDeclaration(
             <th class="visible-md visible-lg timeline-icon">
                 <a class="btn btn-sm btn-nospin btn-default" data-activate-details="all" data-toggle="tooltip"
                    title="<?php echo $view['translator']->trans(
-                       'mautic.contactclient.transactions.toggle_all_details'
-                   ); ?>">
+          'mautic.contactclient.transactions.toggle_all_details'
+      ); ?>">
                     <span class="fa fa-fw fa-level-down"></span>
                 </a>
             </th>
@@ -102,11 +102,11 @@ $view['assets']->addScriptDeclaration(
                        'mautic.contactclient.transactions.message'
                    ); ?>">
                     <?php echo $view['translator']->trans(
-                        'mautic.contactclient.transactions.message'
-                    ); ?>
+                       'mautic.contactclient.transactions.message'
+                   ); ?>
                     <i class="fa fa-sort<?php echo 'message' === $order[0] ? '-amount-'.strtolower(
-                            $order[1]
-                        ) : ''; ?>"></i>
+                        $order[1]
+                    ) : ''; ?>"></i>
                 </a>
                 <input class="transaction-filter" id="filter-message"
                        name="filter-message" <?php echo $filterDisplay; ?>
@@ -119,14 +119,14 @@ $view['assets']->addScriptDeclaration(
                    data-sort_dir="<?php echo 'contact_id' === $order[0] ? $toggleDir : 'DESC'; ?>"
                    data-toggle="tooltip"
                    title="<?php echo $view['translator']->trans(
-                       'mautic.contactclient.transactions.contact_id'
-                   ); ?>">
+                            'mautic.contactclient.transactions.contact_id'
+                        ); ?>">
                     <?php echo $view['translator']->trans(
-                        'mautic.contactclient.transactions.contact_id'
-                    ); ?>
+                       'mautic.contactclient.transactions.contact_id'
+                   ); ?>
                     <i class="fa fa-sort<?php echo 'contact_id' === $order[0] ? '-amount-'.strtolower(
-                            $order[1]
-                        ) : ''; ?>"></i>
+                        $order[1]
+                    ) : ''; ?>"></i>
                 </a>
                 <input class="transaction-filter" id="filter-contact_id"
                        name="filter-contact_id" <?php echo $filterDisplay; ?>
@@ -138,14 +138,14 @@ $view['assets']->addScriptDeclaration(
                 <a class="timeline-header-sort" data-toggle="tooltip" data-sort="utm_source"
                    data-sort_dir="<?php echo 'utm_source' === $order[0] ? $toggleDir : 'DESC'; ?>"
                    title="<?php echo $view['translator']->trans(
-                       'mautic.contactclient.transactions.utm_source'
-                   ); ?>">
+                            'mautic.contactclient.transactions.utm_source'
+                        ); ?>">
                     <?php echo $view['translator']->trans(
-                        'mautic.contactclient.transactions.utm_source'
-                    ); ?>
+                       'mautic.contactclient.transactions.utm_source'
+                   ); ?>
                     <i class="fa fa-sort<?php echo 'utm_source' === $order[0] ? '-amount-'.strtolower(
-                            $order[1]
-                        ) : ''; ?>"></i>
+                        $order[1]
+                    ) : ''; ?>"></i>
                 </a>
                 <input class="transaction-filter" id="filter-utm_source"
                        name="filter-utm_source" <?php echo $filterDisplay; ?>
@@ -158,14 +158,14 @@ $view['assets']->addScriptDeclaration(
                    data-sort_dir="<?php echo 'type' === $order[0] ? $toggleDir : 'DESC'; ?>"
                    data-toggle="tooltip"
                    title="<?php echo $view['translator']->trans(
-                       'mautic.contactclient.transactions.event_type'
-                   ); ?>">
+                            'mautic.contactclient.transactions.event_type'
+                        ); ?>">
                     <?php echo $view['translator']->trans(
-                        'mautic.contactclient.transactions.event_type'
-                    ); ?>
+                       'mautic.contactclient.transactions.event_type'
+                   ); ?>
                     <i class="fa fa-sort<?php echo 'type' === $order[0] ? '-amount-'.strtolower(
-                            $order[1]
-                        ) : ''; ?>"></i>
+                        $order[1]
+                    ) : ''; ?>"></i>
                 </a><input class="transaction-filter" id="filter-type" name="filter-type" <?php echo $filterDisplay; ?>
                            size="10"
                            placeholder="Type ="
@@ -175,14 +175,14 @@ $view['assets']->addScriptDeclaration(
                 <a class="timeline-header-sort" data-toggle="tooltip" data-sort="date_added"
                    data-sort_dir="<?php echo 'date_added' === $order[0] ? $toggleDir : 'DESC'; ?>"
                    title="<?php echo $view['translator']->trans(
-                       'mautic.contactclient.transactions.event_timestamp'
-                   ); ?>">
+                            'mautic.contactclient.transactions.event_timestamp'
+                        ); ?>">
                     <?php echo $view['translator']->trans(
-                        'mautic.contactclient.transactions.event_timestamp'
-                    ); ?>
+                       'mautic.contactclient.transactions.event_timestamp'
+                   ); ?>
                     <i class="fa fa-sort<?php echo 'date_added' === $order[0] ? '-amount-'.strtolower(
-                            $order[1]
-                        ) : ''; ?>"></i>
+                        $order[1]
+                    ) : ''; ?>"></i>
                 </a>
             </th>
         </tr>
@@ -229,8 +229,8 @@ $view['assets']->addScriptDeclaration(
                        class="btn btn-sm btn-nospin btn-default<?php if (empty($details)) {
                 echo ' disabled';
             } ?>" data-toggle="tooltip" title="<?php echo $view['translator']->trans(
-                        'mautic.contactclient.transactions.toggle_details'
-                    ); ?>">
+                'mautic.contactclient.transactions.toggle_details'
+            ); ?>">
                         <span class="fa fa-fw <?php echo $icon; ?>"></span>
                     </a>
                 </td>
@@ -259,8 +259,8 @@ $view['assets']->addScriptDeclaration(
 </div>
 <?php
 echo $view->render(
-    'MauticCoreBundle:Helper:pagination.html.php',
-    [
+                        'MauticCoreBundle:Helper:pagination.html.php',
+                        [
         'page'       => $transactions['page'],
         'fixedPages' => $transactions['maxPages'],
         'fixedLimit' => true,
@@ -268,7 +268,7 @@ echo $view->render(
         'target'     => '#transactions-table',
         'totalItems' => $transactions['total'],
     ]
-); ?>
+                    ); ?>
 
 <?php $view['assets']->outputScripts('tabClose'); ?>
 

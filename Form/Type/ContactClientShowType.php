@@ -16,6 +16,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use MauticPlugin\MauticContactClientBundle\Form\ContactClientListType;
 
 /**
  * Class ContactClientShowType.
@@ -43,7 +44,7 @@ class ContactClientShowType extends AbstractType
     {
         $builder->add(
             'contactclient',
-            'contactclient_list',
+            ContactClientListType::class,
             [
                 'label'       => 'mautic.contactclient.contactclientitem.selectitem',
                 'label_attr'  => ['class' => 'control-label'],
@@ -125,7 +126,7 @@ class ContactClientShowType extends AbstractType
     /**
      * @return string
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'contactclientshow_list';
     }

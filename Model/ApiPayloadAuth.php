@@ -116,9 +116,9 @@ class ApiPayloadAuth extends AbstractCommonModel
     public function reset($exclusions = ['tokenHelper', 'em'])
     {
         foreach (array_diff_key(
-                     get_class_vars(get_class($this)),
-                     array_flip($exclusions)
-                 ) as $name => $default) {
+            get_class_vars(get_class($this)),
+            array_flip($exclusions)
+        ) as $name => $default) {
             $this->$name = $default;
         }
 

@@ -13,7 +13,6 @@ namespace MauticPlugin\MauticContactClientBundle\Model;
 
 use DOMDocument;
 use Exception;
-use FOS\RestBundle\Util\Codes;
 use MauticPlugin\MauticContactClientBundle\Entity\Stat;
 use MauticPlugin\MauticContactClientBundle\Exception\ContactClientException;
 use MauticPlugin\MauticContactClientBundle\Helper\FilterHelper;
@@ -404,7 +403,7 @@ class ApiPayloadResponse
                 // If there is no success definition, than do the default test of a 200 ok status check.
                 // -404 is just a falsy value to signify this from the filter helper.
                 if (-404 === $this->valid) {
-                    if (!$this->responseActual['status'] || Codes::HTTP_OK != $this->responseActual['status']) {
+                    if (!$this->responseActual['status'] || Response::HTTP_OK != $this->responseActual['status']) {
                         $this->valid = false;
                         throw new ContactClientException(
                             'Status code is not 200. Default validation failure.',
@@ -435,27 +434,27 @@ class ApiPayloadResponse
                     && in_array(
                         $this->responseActual['status'],
                         [
-                            Codes::HTTP_NOT_FOUND,
-                            Codes::HTTP_METHOD_NOT_ALLOWED,
-                            Codes::HTTP_REQUEST_TIMEOUT,
-                            Codes::HTTP_CONFLICT,
-                            Codes::HTTP_GONE,
-                            Codes::HTTP_LENGTH_REQUIRED,
-                            Codes::HTTP_REQUEST_ENTITY_TOO_LARGE,
-                            Codes::HTTP_REQUEST_URI_TOO_LONG,
-                            Codes::HTTP_UNSUPPORTED_MEDIA_TYPE,
-                            Codes::HTTP_REQUESTED_RANGE_NOT_SATISFIABLE,
-                            Codes::HTTP_TOO_MANY_REQUESTS,
-                            Codes::HTTP_REQUEST_HEADER_FIELDS_TOO_LARGE,
-                            Codes::HTTP_INTERNAL_SERVER_ERROR,
-                            Codes::HTTP_NOT_IMPLEMENTED,
-                            Codes::HTTP_BAD_GATEWAY,
-                            Codes::HTTP_SERVICE_UNAVAILABLE,
-                            Codes::HTTP_GATEWAY_TIMEOUT,
-                            Codes::HTTP_VERSION_NOT_SUPPORTED,
-                            Codes::HTTP_INSUFFICIENT_STORAGE,
-                            Codes::HTTP_LOOP_DETECTED,
-                            Codes::HTTP_NOT_EXTENDED,
+                            Response::HTTP_NOT_FOUND,
+                            Response::HTTP_METHOD_NOT_ALLOWED,
+                            Response::HTTP_REQUEST_TIMEOUT,
+                            Response::HTTP_CONFLICT,
+                            Response::HTTP_GONE,
+                            Response::HTTP_LENGTH_REQUIRED,
+                            Response::HTTP_REQUEST_ENTITY_TOO_LARGE,
+                            Response::HTTP_REQUEST_URI_TOO_LONG,
+                            Response::HTTP_UNSUPPORTED_MEDIA_TYPE,
+                            Response::HTTP_REQUESTED_RANGE_NOT_SATISFIABLE,
+                            Response::HTTP_TOO_MANY_REQUESTS,
+                            Response::HTTP_REQUEST_HEADER_FIELDS_TOO_LARGE,
+                            Response::HTTP_INTERNAL_SERVER_ERROR,
+                            Response::HTTP_NOT_IMPLEMENTED,
+                            Response::HTTP_BAD_GATEWAY,
+                            Response::HTTP_SERVICE_UNAVAILABLE,
+                            Response::HTTP_GATEWAY_TIMEOUT,
+                            Response::HTTP_VERSION_NOT_SUPPORTED,
+                            Response::HTTP_INSUFFICIENT_STORAGE,
+                            Response::HTTP_LOOP_DETECTED,
+                            Response::HTTP_NOT_EXTENDED,
                         ]
                     )
                 ) {
@@ -475,11 +474,11 @@ class ApiPayloadResponse
                     && in_array(
                         $this->responseActual['status'],
                         [
-                            Codes::HTTP_BAD_REQUEST,
-                            Codes::HTTP_UNAUTHORIZED,
-                            Codes::HTTP_PAYMENT_REQUIRED,
-                            Codes::HTTP_FORBIDDEN,
-                            Codes::HTTP_PROXY_AUTHENTICATION_REQUIRED,
+                            Response::HTTP_BAD_REQUEST,
+                            Response::HTTP_UNAUTHORIZED,
+                            Response::HTTP_PAYMENT_REQUIRED,
+                            Response::HTTP_FORBIDDEN,
+                            Response::HTTP_PROXY_AUTHENTICATION_REQUIRED,
                         ]
                     )
                 ) {

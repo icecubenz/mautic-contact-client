@@ -284,7 +284,8 @@ class TokenHelper
                 // If there are new timezones, recreate the helper.
                 if (
                     !$this->engine->hasHelper('date')
-                    || ($this->engine->hasHelper('date')
+                    || (
+                        $this->engine->hasHelper('date')
                         && (
                             $this->timezoneSource !== $this->dateFormatHelper->getTimezoneSource()
                             || $this->timezoneDestination !== $this->dateFormatHelper->getTimezoneDestination()

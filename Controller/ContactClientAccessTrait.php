@@ -166,7 +166,7 @@ trait ContactClientAccessTrait
     protected function checkAllAccess($action, $limit)
     {
         /** @var ContactClientModel $model */
-        $model = $this->getModel('contactClient');
+        $model = $this->getModel('contactclient');
 
         //make sure the user has view access to contactClients
         $repo = $model->getRepository();

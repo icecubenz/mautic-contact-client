@@ -19,7 +19,7 @@ use Mautic\CampaignBundle\CampaignEvents;
 use Mautic\CampaignBundle\Entity\LeadEventLog;
 use Mautic\CampaignBundle\Entity\LeadEventLogRepository;
 use Mautic\CampaignBundle\Event\ScheduledEvent;
-use Mautic\CoreBundle\EventListener\CommonSubscriber;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Mautic\CoreBundle\Helper\IpLookupHelper;
 use Mautic\CoreBundle\Model\AuditLogModel;
 use Mautic\FormBundle\Helper\TokenHelper as FormTokenHelper;
@@ -38,7 +38,7 @@ use Symfony\Component\Routing\RouterInterface;
 /**
  * Class ContactClientSubscriber.
  */
-class ContactClientSubscriber extends CommonSubscriber
+class ContactClientSubscriber implements EventSubscriberInterface
 {
     /** @var Session */
     public $session;
@@ -87,6 +87,11 @@ class ContactClientSubscriber extends CommonSubscriber
     protected $pageModel;
 
     /**
+     * @var EntityManager
+     */
+    protected $em;
+
+    /**
      * ContactClientSubscriber constructor.
      *
      * @param RouterInterface    $router
@@ -98,6 +103,7 @@ class ContactClientSubscriber extends CommonSubscriber
      * @param FormTokenHelper    $formTokenHelper
      * @param ContactClientModel $contactclientModel
      * @param Session            $session
+     * @param EntityManager      $em
      */
     public function __construct(
         RouterInterface $router,
@@ -108,7 +114,8 @@ class ContactClientSubscriber extends CommonSubscriber
         AssetTokenHelper $assetTokenHelper,
         FormTokenHelper $formTokenHelper,
         ContactClientModel $contactclientModel,
-        Session $session
+        Session $session,
+        EntityManager $em
     ) {
         $this->router             = $router;
         $this->ipHelper           = $ipLookupHelper;
@@ -119,6 +126,7 @@ class ContactClientSubscriber extends CommonSubscriber
         $this->formTokenHelper    = $formTokenHelper;
         $this->contactclientModel = $contactclientModel;
         $this->session            = $session;
+        $this->em                 = $em;
     }
 
     /**

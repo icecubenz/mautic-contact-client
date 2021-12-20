@@ -236,8 +236,8 @@ class ContactClientTimelineEvent extends Event
 
                 // Ensure a full URL
                 if ($this->siteDomain && isset($data['eventLabel']) && is_array(
-                        $data['eventLabel']
-                    ) && isset($data['eventLabel']['href'])) {
+                    $data['eventLabel']
+                ) && isset($data['eventLabel']['href'])) {
                     // If this does not have a http, then assume a Mautic URL
                     if (false === strpos($data['eventLabel']['href'], '://')) {
                         $data['eventLabel']['href'] = $this->siteDomain.$data['eventLabel']['href'];

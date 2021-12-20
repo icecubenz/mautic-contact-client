@@ -19,7 +19,20 @@ use MauticPlugin\MauticContactClientBundle\Constraints\JsonArray;
 use MauticPlugin\MauticContactClientBundle\Constraints\JsonObject;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Mautic\CoreBundle\Form\Type\YesNoButtonGroupType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
+use Symfony\Component\Form\Extension\Core\Type\RangeType;
+use Symfony\Component\Form\Extension\Core\Type\TimezoneType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Mautic\CategoryBundle\Form\Type\CategoryListType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Mautic\CoreBundle\Form\Type\ButtonGroupType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Mautic\CoreBundle\Form\Type\FormButtonsType;
 
 /**
  * Class ContactClientType.
@@ -58,7 +71,7 @@ class ContactClientType extends AbstractType
 
         $builder->add(
             'name',
-            'text',
+            TextType::class,
             [
                 'label'      => 'mautic.core.name',
                 'label_attr' => ['class' => 'control-label'],
@@ -68,7 +81,7 @@ class ContactClientType extends AbstractType
 
         $builder->add(
             'description',
-            'textarea',
+            TextareaType::class,
             [
                 'label'      => 'mautic.core.description',
                 'label_attr' => ['class' => 'control-label'],
@@ -79,7 +92,7 @@ class ContactClientType extends AbstractType
 
         $builder->add(
             'api_payload',
-            'textarea',
+            TextareaType::class,
             [
                 'label'       => 'mautic.contactclient.form.api_payload',
                 'label_attr'  => ['class' => 'control-label api-payload'],
@@ -94,7 +107,7 @@ class ContactClientType extends AbstractType
 
         $builder->add(
             'file_payload',
-            'textarea',
+            TextareaType::class,
             [
                 'label'       => 'mautic.contactclient.form.file_payload',
                 'label_attr'  => ['class' => 'control-label file-payload'],
@@ -109,7 +122,7 @@ class ContactClientType extends AbstractType
 
         $builder->add(
             'website',
-            'url',
+            UrlType::class,
             [
                 'label'      => 'mautic.contactclient.form.website',
                 'label_attr' => ['class' => 'control-label'],
@@ -123,7 +136,7 @@ class ContactClientType extends AbstractType
 
         $builder->add(
             'attribution_default',
-            'number',
+            NumberType::class,
             [
                 'label'      => 'mautic.contactclient.form.attribution.default',
                 'label_attr' => ['class' => 'control-label'],
@@ -138,7 +151,7 @@ class ContactClientType extends AbstractType
 
         $builder->add(
             'attribution_settings',
-            'textarea',
+            TextareaType::class,
             [
                 'label'       => 'mautic.contactclient.form.attribution.settings',
                 'label_attr'  => ['class' => 'control-label'],
@@ -153,7 +166,7 @@ class ContactClientType extends AbstractType
 
         $builder->add(
             'duplicate',
-            'textarea',
+            TextareaType::class,
             [
                 'label'       => 'mautic.contactclient.form.duplicate',
                 'label_attr'  => ['class' => 'control-label'],
@@ -169,7 +182,7 @@ class ContactClientType extends AbstractType
 
         $builder->add(
             'exclusive',
-            'textarea',
+            TextareaType::class,
             [
                 'label'       => 'mautic.contactclient.form.exclusive',
                 'label_attr'  => ['class' => 'control-label'],
@@ -184,7 +197,6 @@ class ContactClientType extends AbstractType
         );
 
         $exclusiveIgnore = [
-            'read_only'  => false,
             'data'       => (bool) $options['data']->getExclusiveIgnore(),
             'label'      => 'mautic.contactclient.form.exclusive_ignore',
             'label_attr' => ['class' => 'control-label'],
@@ -200,13 +212,13 @@ class ContactClientType extends AbstractType
         }
         $builder->add(
             'exclusive_ignore',
-            'yesno_button_group',
+            YesNoButtonGroupType::class,
             $exclusiveIgnore
         );
 
         $builder->add(
             'filter',
-            'textarea',
+            TextareaType::class,
             [
                 'label'       => 'mautic.contactclient.form.filter',
                 'label_attr'  => ['class' => 'control-label'],
@@ -222,7 +234,7 @@ class ContactClientType extends AbstractType
 
         $builder->add(
             'limits',
-            'textarea',
+            TextareaType::class,
             [
                 'label'       => 'mautic.contactclient.form.limits',
                 'label_attr'  => ['class' => 'control-label'],
@@ -238,9 +250,8 @@ class ContactClientType extends AbstractType
 
         $builder->add(
             'limits_queue',
-            'yesno_button_group',
+            YesNoButtonGroupType::class,
             [
-                'read_only'  => false,
                 'data'       => (bool) $options['data']->getLimitsQueue(),
                 'label'      => 'mautic.contactclient.form.limits_queue',
                 'label_attr' => ['class' => 'control-label'],
@@ -254,7 +265,7 @@ class ContactClientType extends AbstractType
 
         $builder->add(
             'limits_queue_spread',
-            'range',
+            RangeType::class,
             [
                 'required'   => false,
                 'data'       => min(7, max(1, (int) $options['data']->getLimitsQueueSpread())),
@@ -275,7 +286,7 @@ class ContactClientType extends AbstractType
 
         $builder->add(
             'schedule_timezone',
-            'timezone',
+            TimezoneType::class,
             [
                 'label'       => 'mautic.contactclient.form.schedule_timezone',
                 'label_attr'  => ['class' => 'control-label'],
@@ -284,14 +295,14 @@ class ContactClientType extends AbstractType
                     'tooltip' => 'mautic.contactclient.form.schedule_timezone.tooltip',
                 ],
                 'multiple'    => false,
-                'empty_value' => 'mautic.user.user.form.defaulttimezone',
+                'placeholder' => 'mautic.user.user.form.defaulttimezone',
                 'required'    => false,
             ]
         );
 
         $builder->add(
             'schedule_hours',
-            'textarea',
+            TextareaType::class,
             [
                 'label'       => 'mautic.contactclient.form.schedule_hours',
                 'label_attr'  => ['class' => 'control-label'],
@@ -307,9 +318,8 @@ class ContactClientType extends AbstractType
 
         $builder->add(
             'schedule_queue',
-            'yesno_button_group',
+            YesNoButtonGroupType::class,
             [
-                'read_only'  => false,
                 'data'       => (bool) $options['data']->getScheduleQueue(),
                 'label'      => 'mautic.contactclient.form.schedule_queue',
                 'label_attr' => ['class' => 'control-label'],
@@ -323,7 +333,7 @@ class ContactClientType extends AbstractType
 
         $builder->add(
             'schedule_queue_spread',
-            'range',
+            RangeType::class,
             [
                 'required'   => false,
                 'data'       => min(7, max(1, (int) $options['data']->getScheduleQueueSpread())),
@@ -344,7 +354,7 @@ class ContactClientType extends AbstractType
 
         $builder->add(
             'schedule_exclusions',
-            'textarea',
+            TextareaType::class,
             [
                 'label'       => 'mautic.contactclient.form.schedule_exclusions',
                 'label_attr'  => ['class' => 'control-label'],
@@ -360,7 +370,7 @@ class ContactClientType extends AbstractType
 
         $builder->add(
             'dnc_checks',
-            'choice',
+            ChoiceType::class,
             [
                 'choices'    => array_flip($this->contactModel->getPreferenceChannels()),
                 'data'       => explode(',', $options['data']->getDncChecks()),
@@ -379,7 +389,7 @@ class ContactClientType extends AbstractType
         //add category
         $builder->add(
             'category',
-            'category',
+            CategoryListType::class,
             [
                 'bundle' => 'plugin:contactclient',
             ]
@@ -398,16 +408,16 @@ class ContactClientType extends AbstractType
 
         $builder->add(
             'isPublished',
-            'yesno_button_group',
+            YesNoButtonGroupType::class,
             [
-                'read_only' => $readonly,
+                'disabled' => $readonly,
                 'data'      => $data,
             ]
         );
 
         $builder->add(
             'publishUp',
-            'datetime',
+            DateTimeType::class,
             [
                 'widget'     => 'single_text',
                 'label'      => 'mautic.core.form.publishup',
@@ -423,7 +433,7 @@ class ContactClientType extends AbstractType
 
         $builder->add(
             'publishDown',
-            'datetime',
+            DateTimeType::class,
             [
                 'widget'     => 'single_text',
                 'label'      => 'mautic.core.form.publishdown',
@@ -439,7 +449,7 @@ class ContactClientType extends AbstractType
 
         $builder->add(
             'type',
-            'button_group',
+            ButtonGroupType::class,
             [
                 'label'             => 'mautic.contactclient.form.type',
                 'label_attr'        => ['class' => 'control-label contactclient-type'],
@@ -447,7 +457,6 @@ class ContactClientType extends AbstractType
                     'mautic.contactclient.form.type.api'  => 'api',
                     'mautic.contactclient.form.type.file' => 'file',
                 ],
-                'choices_as_values' => true,
                 'required'          => true,
                 'attr'              => [
                     'class'    => 'form-control',
@@ -466,7 +475,7 @@ class ContactClientType extends AbstractType
         if (!empty($options['update_select'])) {
             $builder->add(
                 'buttons',
-                'form_buttons',
+                FormButtonsType::class,
                 [
                     'apply_text'        => false,
                     'pre_extra_buttons' => $customButtons,
@@ -474,7 +483,7 @@ class ContactClientType extends AbstractType
             );
             $builder->add(
                 'updateSelect',
-                'hidden',
+                HiddenType::class,
                 [
                     'data'   => $options['update_select'],
                     'mapped' => false,
@@ -483,7 +492,7 @@ class ContactClientType extends AbstractType
         } else {
             $builder->add(
                 'buttons',
-                'form_buttons',
+                FormButtonsType::class,
                 [
                     'pre_extra_buttons' => $customButtons,
                 ]
@@ -494,11 +503,11 @@ class ContactClientType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             [
-                'data_class' => 'MauticPlugin\MauticContactClientBundle\Entity\ContactClient',
+                'data_class' => \MauticPlugin\MauticContactClientBundle\Entity\ContactClient::class,
             ]
         );
         $resolver->setDefined(['update_select']);
@@ -507,7 +516,7 @@ class ContactClientType extends AbstractType
     /**
      * @return string
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'contactclient';
     }

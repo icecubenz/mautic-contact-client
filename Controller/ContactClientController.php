@@ -213,7 +213,7 @@ class ContactClientController extends FormController
             }
 
             $chartFilterForm = $this->get('form.factory')->create(
-                'contactclient_chart',
+                MauticPlugin\MauticContactClientBundle\Form\Type\ChartFilterType::class,
                 $chartFilterValues,
                 [
                     'action' => $this->generateUrl(

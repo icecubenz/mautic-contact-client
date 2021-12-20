@@ -215,7 +215,7 @@ trait ContactClientDetailsTrait
             //  if (!$contactClient->getEmail()) continue; // discard contacts without email
 
             /** @var ContactClientModel $model */
-            $model       = $this->getModel('contactClient');
+            $model       = $this->getModel('contactclient');
             $engagements = $model->getEngagements($contactClient, $filters, $orderBy, $page, $limit);
             $events      = $engagements['events'];
             $types       = $engagements['types'];
@@ -305,7 +305,7 @@ trait ContactClientDetailsTrait
         $chartQuery = new ChartQuery($this->getDoctrine()->getConnection(), $fromDate, $toDate);
 
         /** @var ContactClientModel $model */
-        $model       = $this->getModel('contactClient');
+        $model       = $this->getModel('contactclient');
         $engagements = $model->getEngagementCount($contactClient, $fromDate, $toDate, 'm', $chartQuery);
         $lineChart->setDataset(
             $translator->trans('mautic.contactclient.graph.line.all_engagements'),
@@ -365,7 +365,7 @@ trait ContactClientDetailsTrait
 
         // Audit Log
         /** @var AuditLogModel $auditlogModel */
-        $auditlogModel = $this->getModel('core.auditLog');
+        $auditlogModel = $this->getModel('core.auditlog');
 
         $logs     = $auditlogModel->getLogForObject(
             'contactclient',

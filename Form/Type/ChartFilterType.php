@@ -90,7 +90,7 @@ class ChartFilterType extends AbstractType
 
         $builder->add(
             'type',
-            'choice',
+            ChoiceType::class,
             [
                 'choices'     => $typeChoices,
                 'attr'        => [
@@ -117,7 +117,7 @@ class ChartFilterType extends AbstractType
             : new DateTime($options['data']['date_from']);
         $builder->add(
             'date_from',
-            'text',
+            TextType::class,
             [
                 'label'      => 'mautic.core.date.from',
                 'label_attr' => ['class' => 'control-label', 'autocomplete' => 'off'],
@@ -133,7 +133,7 @@ class ChartFilterType extends AbstractType
 
         $builder->add(
             'date_to',
-            'text',
+            TextType::class,
             [
                 'label'      => 'mautic.core.date.to',
                 'label_attr' => ['class' => 'control-label', 'autocomplete' => 'off'],
@@ -145,7 +145,7 @@ class ChartFilterType extends AbstractType
 
         $builder->add(
             'apply',
-            'submit',
+            SubmitType::class,
             [
                 'label' => 'mautic.core.form.apply',
                 'attr'  => ['class' => 'btn btn-default'],
@@ -160,7 +160,7 @@ class ChartFilterType extends AbstractType
     /**
      * @return string
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'contactclient_chart';
     }

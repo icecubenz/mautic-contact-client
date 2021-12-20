@@ -11,13 +11,13 @@
 
 namespace MauticPlugin\MauticContactClientBundle\EventListener;
 
-use Mautic\CoreBundle\EventListener\CommonSubscriber;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use MauticPlugin\MauticContactClientBundle\Model\ContactClientModel;
 
 /**
  * Class StatSubscriber.
  */
-class StatSubscriber extends CommonSubscriber
+class StatSubscriber implements EventSubscriberInterface
 {
     /**
      * @var ContactClientModel
